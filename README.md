@@ -1,4 +1,4 @@
 StudentSystem
 =============
 
-A C
+A C programming homework
