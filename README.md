@@ -1,4 +1,0 @@
-StudentSystem
-=============
-
-A C
