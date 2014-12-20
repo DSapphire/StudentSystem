@@ -68,7 +68,7 @@ void update_student(Stu *stemp,char mode){
 				}	
 			}
 		}else{
-			if(ctemp->cap==ctemp->load){
+			if(ctemp->cap<=ctemp->load){//
 				printf("\n课容量已满，无法选课！\n");
 			}else{
 				if(ctemp->cap-ctemp->load<4)
@@ -124,7 +124,8 @@ void update_student(Stu *stemp,char mode){
 					printf("\n您没有选这门课程！"); 
 				}else{
 					fp=fopen(TEMP,"w");
-					for(mycourse=0;mycourse!=i&&mycourse<stemp->mycourse;mycourse++){
+					for(mycourse=0;mycourse<stemp->mycourse;mycourse++){
+						if(mycourse!=i)
 						fprintf(fp,"%s %.2f %.2f %d \n",(stemp->course[mycourse]).name,(stemp->course[mycourse]).credit,(stemp->course[mycourse]).grade,(stemp->course[mycourse]).final);
 					}
 					fclose(fp);
