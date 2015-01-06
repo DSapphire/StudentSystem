@@ -221,8 +221,8 @@ void modify_course(Course *courlist,char *name){
 		temp=cursor->next;
 		do{
 			print_course(temp,0);
-			printf("\n请输入您要修改的内容：\n");printf("1-修改课容量\n");
-			printf("2-修改课程类型\n");printf("3-修改课程学分\n");printf("0-保存退出\n");
+			printf("\n请输入您要修改的内容：\n1-修改课容量\n");
+			printf("2-修改课程类型\n3-修改课程学分\n0-保存退出\n");
 			ch=getchar();fflush(stdin);
 			switch(ch){
 				case '1':

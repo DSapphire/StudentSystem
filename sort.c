@@ -37,7 +37,7 @@ void swap_course(Course *cour1,Course *cour2){
 	cour2->name=(char*)malloc(sizeof(name)+1);strcpy(cour2->name,name);free(name);
 	type=cour1->type;cour1->type=cour2->type;cour2->type=type;
 	credit=cour1->credit;cour1->credit=cour2->credit;cour2->credit=credit;
-	cap=cour1->credit;cour1->cap=cour2->cap;cour2->cap=cap;
+	cap=cour1->cap;cour1->cap=cour2->cap;cour2->cap=cap;
 	load=cour1->load;cour1->load=cour2->load;cour2->load=load;
 }
 void sort_student(char *cname,int cload){

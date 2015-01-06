@@ -14,7 +14,7 @@ void menu_course(){
 	Course *courlist;
 	do{
 		fflush(stdin);
-		printf("1-载入课程信息\t");printf("2-重新创建所有课程\n");printf("0-返回\n");printf("\n请选择操作类型：\n");
+		printf("1-载入课程信息\t2-重新创建所有课程\n0-返回\n\n请选择操作类型：\n");
 		ch=getchar();fflush(stdin);
 		switch(ch){
 			case '1':
@@ -48,9 +48,9 @@ void menu_sub_course(Course *courlist){
 	Course *temp;
 	char ch,sch,name[20];
 	do{
-		fflush(stdin);printf("\n操作类型：\n");printf("1-查找课程信息\t\t");printf("2-修改课程信息\n");
-		printf("3-删除课程\t\t");printf("4-新增课程\n");printf("5-查课程热度\t\t");printf("6-成绩录入\n");
-		printf("7-保存课程信息到文件\t");printf("0-返回.\n");printf("\n请输入操作类型数字序号：\n");
+		fflush(stdin);printf("\n操作类型：\n1-查找课程信息\t\t2-修改课程信息\n");
+		printf("3-删除课程\t\t4-新增课程\n5-查课程热度\t\t6-成绩录入\n");
+		printf("7-保存课程信息到文件\t0-返回.\n\n请输入操作类型数字序号：\n");
 		ch=getchar();fflush(stdin);
 		switch(ch){
 			case '1':
@@ -127,7 +127,7 @@ void menu_student(){
 	Stu *stulist;
 	do{
 		fflush(stdin);
-		printf("请选择操作类型：\n");printf("1-载入学生信息\t");printf("2-重新创建所有学生信息\n");printf("0-返回\n");
+		printf("请选择操作类型：\n1-载入学生信息\t2-重新创建所有学生信息\n0-返回\n");
 		ch=getchar();fflush(stdin);
 		switch(ch){
 			case '1': 
@@ -160,9 +160,9 @@ void menu_sub_student(Stu *stulist){
 	Stu *temp;
 	char ch,sch,no[5];
 	do{
-		fflush(stdin);printf("\n操作类型：\n");printf("1-查找学生信息\t\t");printf("2-修改学生信息（选课和退课）\n");
-		printf("3-删除学生信息\t\t");printf("4-增加学生\n");printf("5-查看所有学生信息\n");printf("6-保存学生信息到文件\n");
-		printf("0-退出.\n");printf("\n请输入操作类型数字序号：\n");
+		fflush(stdin);printf("\n操作类型：\n1-查找学生信息\t\t2-修改学生信息（选课和退课）\n");
+		printf("3-删除学生信息\t\t4-增加学生\n5-查看所有学生信息\n6-保存学生信息到文件\n");
+		printf("0-退出.\n\n请输入操作类型数字序号：\n");
 		ch=getchar();fflush(stdin);
 		switch(ch){
 			case '1':
@@ -233,12 +233,12 @@ void menu_sub_student(Stu *stulist){
 //
 // 
 void backup(int mode){
-	int c,ch;
+	char c,ch;
 	FILE *fr,*fw;
 	if(mode){
+		system("cls");
 		do{
-			system("cls");
-			printf("\n请输入备份内容：\n");printf("1-学生信息\n");printf("2-课程信息\n\n");printf("0-退出程序\n\n");
+			printf("\n请输入备份内容：\n1-学生信息\n2-课程信息\n3-返回\n\n0-退出程序\n\n");
 			ch=getchar();fflush(stdin);
 			switch(ch){
 				case '1':
@@ -253,6 +253,8 @@ void backup(int mode){
 		   				exit(1);
 					}			
 					break;
+				case '3':
+					break;
 				case '0':
 					exit(0);
 				default:
@@ -262,11 +264,11 @@ void backup(int mode){
 				 while((c=fgetc(fr))!=EOF)
 			       fputc(c,fw);
 			    fclose(fr);fclose(fw);
-			    printf("\n备份成功！需要使用备份的时候请手动修改文件名！\n");system("pause");
+			    printf("\n备份成功！需要使用备份的时候请返回菜单！\n");system("pause");
 			}
-		}while(ch!='1'&&ch!='2');	
+		}while(ch!='1'&&ch!='2'&&ch!='3');	
 	}else{
-		if ((fr=fopen(STUDENTBOOK,"r"))==NULL||(fw=fopen(SBACKUP,"w"))==NULL){
+		if ((fr=fopen(SBACKUP,"r"))==NULL||(fw=fopen(STUDENTBOOK,"w"))==NULL){
 			printf("打开失败！\n");
 		   	exit(1);
 		}
@@ -274,20 +276,22 @@ void backup(int mode){
 			fputc(c,fw);
 		fclose(fr);fclose(fw);
 		
-		if ((fr=fopen(COURSEBOOK,"r"))==NULL||(fw=fopen(CBACKUP,"w"))==NULL){
+		if ((fr=fopen(CBACKUP,"r"))==NULL||(fw=fopen(COURSEBOOK,"w"))==NULL){
 			printf("打开失败！\n");
 		   	exit(1);
 		}
 		while((c=fgetc(fr))!=EOF)
 			fputc(c,fw);
+		fclose(fr);fclose(fw);
+		printf("\n备份信息提取成功！\n");	
 	}
 }
 void menu(){
 	char ch;
 	do{
 		system("cls");
-		printf("请选择菜单选项：\n");printf("1-学生信息菜单\n");
-		printf("2-课程信息菜单\n");printf("3-备份信息\n");printf("0-退出程序\n");
+		printf("请选择菜单选项：\n\n");printf("1-学生信息菜单\n");
+		printf("2-课程信息菜单\n");printf("3-备份信息\n");printf("4-使用备份覆盖损坏数据\n\n");printf("0-退出程序\n");
 		ch=getchar();fflush(stdin);
 		switch(ch){
 			case'1':
@@ -298,10 +302,15 @@ void menu(){
 				break;
 			case '3':
 				backup(1);
+				break;
+			case '4':
+				backup(0);
+				break;
 			case '0':
 				break;
 			default:
 				printf("\n错误输入！请重新输入！\n");
 		}
 	}while(ch!='0');
+	
 }

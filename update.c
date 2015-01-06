@@ -115,13 +115,18 @@ void update_student(Stu *stemp,char mode){
 				char flag='n';int i;
 				for(mycourse=0;mycourse<stemp->mycourse;mycourse++){
 					if(strcmp(name,(stemp->course[mycourse]).name)==0){
-						flag='y';
+						if((stemp->course[mycourse]).final)
+							flag='1';
+						else
+							flag='y';
 						i=mycourse;
 						break;
 					}	
 				}
 				if(flag=='n'){
 					printf("\n您没有选这门课程！"); 
+				}else if(flag=='1'){
+					printf("\n这门课已经考试结束，不能退课！\n");
 				}else{
 					fp=fopen(TEMP,"w");
 					for(mycourse=0;mycourse<stemp->mycourse;mycourse++){
